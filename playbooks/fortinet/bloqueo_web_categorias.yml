@@ -7,30 +7,18 @@
 
   vars:
     vdom: "root"
-    perfil_nombre: "bloqueo_categorias"
-    categorias_a_bloquear:
-      - "26"   # Pornography
-      - "21"   # Gambling
-      - "3"    # Games
-      - "5"    # Social Networking
-      - "13"   # Hacking
-      - "59"   # Proxy Avoidance
-
   tasks:
-    - name: Crear perfil de Web Filter para bloquear categorías
+  - name: Crear perfil Web Filter bloqueando categoría 29
       fortios_webfilter_profile:
-        vdom: "{{ vdom }}"
         state: "present"
         webfilter_profile:
-          name: "{{ perfil_nombre }}"
-          webfilter_table_override: "disable"
-          comment: "Perfil de bloqueo por categorías"
+          name: "Bloqueo_Cat_29"
+          comment: "Bloqueo de categoría General Interest - Personal"
           ftgd_wf:
-            options:
-              - "category-filter"
-            category: 
-              {% for item in categorias_a_bloquear %}
-              - id: {{ item }}
+            filters:
+              - id: 29
                 action: block
-              {% endfor %}
-          inspection_mode: "proxy"
+          options:
+            https_replacemsg: enable
+            inspection_mode: proxy
+            log_all_url: enable
