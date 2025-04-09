@@ -28,11 +28,9 @@
           ftgd_wf:
             options:
               - "category-filter"
-            category:
-              - "{{ item }}"
-#              loop_control:
-#                label: "{{ item }}"
-              with_items: "{{ categorias_a_bloquear }}"
-              action: "block"
+            category: 
+              {% for item in categorias_a_bloquear %}
+              - id: {{ item }}
+                action: block
+              {% endfor %}
           inspection_mode: "proxy"
-
