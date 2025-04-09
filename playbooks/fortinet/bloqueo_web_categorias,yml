@@ -1,6 +1,6 @@
 ---
 - name: Configurar perfil de Web Filter en FortiGate
-  hosts: fortigates
+  hosts: fortigate
   connection: httpapi
   collections:
     - fortinet.fortios
