@@ -30,8 +30,8 @@
               - "category-filter"
             category:
               - "{{ item }}"
-              loop_control:
-                label: "{{ item }}"
+#              loop_control:
+#                label: "{{ item }}"
               with_items: "{{ categorias_a_bloquear }}"
               action: "block"
           inspection_mode: "proxy"
