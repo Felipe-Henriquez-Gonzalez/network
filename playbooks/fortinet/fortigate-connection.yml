@@ -1,0 +1,15 @@
+---
+- hosts: fortigate¿
+  collections:
+    - fortinet.fortios
+  gather_facts: no
+
+  tasks:
+    - name: Test connectivity Fortigate
+      fortios_monitor_fact:
+        selector: 'system_status'
+      register: result
+
+    - name: Show Result
+      debug:
+        var: result
