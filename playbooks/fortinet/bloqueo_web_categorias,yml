@@ -1,0 +1,38 @@
+---
+- name: Configurar perfil de Web Filter en FortiGate
+  hosts: fortigates
+  connection: httpapi
+  collections:
+    - fortinet.fortios
+
+  vars:
+    vdom: "root"
+    perfil_nombre: "bloqueo_categorias"
+    categorias_a_bloquear:
+      - "26"   # Pornography
+      - "21"   # Gambling
+      - "3"    # Games
+      - "5"    # Social Networking
+      - "13"   # Hacking
+      - "59"   # Proxy Avoidance
+
+  tasks:
+    - name: Crear perfil de Web Filter para bloquear categorías
+      fortios_webfilter_profile:
+        vdom: "{{ vdom }}"
+        state: "present"
+        webfilter_profile:
+          name: "{{ perfil_nombre }}"
+          webfilter_table_override: "disable"
+          comment: "Perfil de bloqueo por categorías"
+          ftgd_wf:
+            options:
+              - "category-filter"
+            category:
+              - "{{ item }}"
+              loop_control:
+                label: "{{ item }}"
+              with_items: "{{ categorias_a_bloquear }}"
+              action: "block"
+          inspection_mode: "proxy"
+
