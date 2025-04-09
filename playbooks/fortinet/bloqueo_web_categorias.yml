@@ -8,8 +8,9 @@
   vars:
     vdom: "root"
   tasks:
-  - name: Crear perfil Web Filter bloqueando categoría 29
+    - name: Crear perfil Web Filter bloqueando categoría 29
       fortios_webfilter_profile:
+        vdom: "{{ vdom }}"
         state: "present"
         webfilter_profile:
           name: "Bloqueo_Cat_29"
