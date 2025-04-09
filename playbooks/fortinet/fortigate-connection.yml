@@ -1,5 +1,5 @@
 ---
-- hosts: fortigate¿
+- hosts: fortigate
   collections:
     - fortinet.fortios
   gather_facts: no
