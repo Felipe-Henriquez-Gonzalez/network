@@ -1,0 +1,25 @@
+---
+- hosts: fortigate1
+  collections:
+    - fortinet.fortios
+  gather_facts: no
+
+  tasks:
+    - name: Crear política Firewall sencilla
+      fortios_firewall_policy:
+        state: present
+        firewall_policy:
+          policyid: 100
+          name: "Allow_HTTPS"
+          srcintf:
+            - name: "port1"
+          dstintf:
+            - name: "port2"
+          srcaddr:
+            - name: "all"
+          dstaddr:
+            - name: "all"
+          action: "accept"
+          schedule: "always"
+          service:
+            - name: "HTTPS"
